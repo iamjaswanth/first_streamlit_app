@@ -1,6 +1,6 @@
 import streamlit as st
 
-st.title('Uber pickups in NYC')
+st.title('My Moms New healty Dinner')
 st.header('🍌🥭 Build Your Own Fruit Smoothie 🥝🍇')
 st.text('🥣 Omega 3 & Blueberry Oatmeal')
 st.text('🥗Kale, Spinach & Rocket Smoothie')
