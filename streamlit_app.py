@@ -29,6 +29,6 @@ my_data_row = my_cur.fetchall()
 st.header("Hello from Snowflake:")
 st.dataframe(my_data_row)
 fruit_choice2 = st.text_input('What fruit would you like to add?','jackfruit')
-st.write('thanks for adding ', fruit_choice2)
+st.write('Thanks for adding ', fruit_choice2)
 
 
