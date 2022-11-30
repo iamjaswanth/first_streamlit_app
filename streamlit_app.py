@@ -1,6 +1,9 @@
 import streamlit as st
 import pandas as pd
 import snowflake.connector
+import requests
+from urllib.error import URLError
+
 
 st.title('My Moms New healty Dinner')
 st.header('🍌🥭 Build Your Own Fruit Smoothie 🥝🍇')
@@ -15,11 +18,11 @@ st.dataframe(fruits_to_show)
 
 st.header("Fruityvice Fruit Advice!")
 
-import requests
 
 fruit_choice = st.text_input('What fruit would you like information about?','Kiwi')
 st.write('The user entered ', fruit_choice)
 fruityvice_response = requests.get("https://fruityvice.com/api/fruit/" + fruit_choice)
+st.stop()
 
 
 my_cnx = snowflake.connector.connect(**st.secrets["snowflake"])
