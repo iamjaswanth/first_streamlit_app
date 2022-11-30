@@ -40,7 +40,7 @@ except URLError as e:
 st.write('The user entered ', fruit_choice)
 
 
-def get_fruitLoadlist()
+def get_fruitLoadlist():
     with my_cnx.cursor() as my_cur:
       my_cur.execute("select * from fruit_load_list")
       return my_cur.fetchall()
