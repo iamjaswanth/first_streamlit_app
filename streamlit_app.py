@@ -11,7 +11,7 @@ import streamlit as st
 
 st.title('Momentum Investing')
 st.header('Know what you own, and know why you own it.')
-my_fruit_list = pd.read_csv("./ind_niftymicrocap250_list.csv") 
+tickers = pd.read_csv("./ind_niftymicrocap250_list.csv") 
 index_name = '^NSEI' # NIFTY50
 start_date = datetime.datetime.now()  - datetime.timedelta(days=365)
 end_date = datetime.date.today()
