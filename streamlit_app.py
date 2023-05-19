@@ -116,9 +116,8 @@ for stock in rs_stocks:
         print (e)
         print(f"Could not gather data on {stock}")
 
-if len(export_df) >0:
-    st.write("Sorted DataFrame:")
-    st.write(export_df)
+  st.write("Sorted DataFrame:")
+  st.write(export_df)
     
 
 
