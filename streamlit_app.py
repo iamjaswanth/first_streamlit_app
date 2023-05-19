@@ -105,9 +105,6 @@ for stock in rs_stocks:
         # Condition 5: Current Price > 50 SMA
         condition_9 = currentClose > moving_average_20
         
-
-         
-        
         CP = currentClose
 
 
@@ -123,8 +120,8 @@ exportList = exportList.sort_values(by='RS_Rating', ascending=False)
 print(exportList.iloc[:25])
 
 MomentumStocks = exportList.iloc[:25][['Stock', 'CP']]
-df = pd.DataFrame(MomentumStocks)
-st.write(df) 
+df = pd.DataFrame(exportList)
+st.write(exportList) 
 
 
 
