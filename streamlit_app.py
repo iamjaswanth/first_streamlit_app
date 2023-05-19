@@ -57,7 +57,7 @@ rs_df = rs_df[rs_df.RS_Rating >= rs_df.RS_Rating.quantile(.70)]
 # Checking Minervini conditions of top 30% of stocks in given list
 rs_stocks = rs_df['Ticker']
 for stock in rs_stocks:
-    print(stock)
+    st.write(stock)
     try:
 
         df = pdr.get_data_yahoo(stock + '.NS', start_date, end_date)
