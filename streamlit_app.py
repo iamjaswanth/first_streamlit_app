@@ -117,12 +117,10 @@ for stock in rs_stocks:
 
 exportList = exportList.sort_values(by='RS_Rating', ascending=False)
 
-print(exportList.iloc[:25])
+     export_df = pd.DataFrame(exportList)
 
-MomentumStocks = exportList.iloc[:25][['Stock', 'CP']]
-df = pd.DataFrame(exportList)
-st.write(exportList) 
-
-
+        # Display the sorted DataFrame
+        st.write("Sorted DataFrame:")
+        st.write(export_df)
 
 
