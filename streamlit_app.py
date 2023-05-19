@@ -15,9 +15,9 @@ tickers = pd.read_csv("./ind_niftymicrocap250_list.csv")
 index_name = '^NSEI' # NIFTY50
 start_date = datetime.datetime.now()  - datetime.timedelta(days=365)
 end_date = datetime.date.today()
-exportList = pd.DataFrame(columns=['Stock', "RS_Rating", "50 Day MA", "150 Day Ma", "200 Day MA", "52 Week Low", "52 week High","CP"])
 returns_multiples = []
-export_df = pd.DataFrame(columns=['Stock', 'RS_Rating', '20 Day MA', '50 Day MA', '150 Day MA', '200 Day MA', '52 Week Low', '52 Week High', 'CP'])
+exportList = pd.DataFrame(
+            columns=['Stock', "RS_Rating", "50 Day MA", "150 Day Ma", "200 Day MA", "52 Week Low", "52 week High", "CP"])
 
 # Index Returns
 index_df = yf.download(index_name, start_date, end_date)
@@ -110,13 +110,13 @@ for stock in rs_stocks:
 
 
         if(condition_1 and condition_2 and condition_3 and condition_4 and condition_5 and condition_6 and condition_7 and condition_8 and condition_9):
-            export_df = export_df.append({'Stock': stock, "RS_Rating": RS_Rating ,"20 Day MA": moving_average_20,"50 Day MA": moving_average_50, "150 Day Ma": moving_average_150, "200 Day MA": moving_average_200, "52 Week Low": low_of_52week, "52 week High": high_of_52week,'CP':CP}, ignore_index=True)
+            exportList = exportList.append({'Stock': stock, "RS_Rating": RS_Rating ,"20 Day MA": moving_average_20,"50 Day MA": moving_average_50, "150 Day Ma": moving_average_150, "200 Day MA": moving_average_200, "52 Week Low": low_of_52week, "52 week High": high_of_52week,'CP':CP}, ignore_index=True)
             print (stock + " made the Minervini requirements")
     except Exception as e:
         print (e)
         print(f"Could not gather data on {stock}")
 st.write("Sorted DataFrame:")
-st.write(export_df)
+st.write(exportList)
     
 
 
