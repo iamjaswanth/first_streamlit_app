@@ -116,11 +116,14 @@ for stock in rs_stocks:
         print(f"Could not gather data on {stock}")
 
 exportList = exportList.sort_values(by='RS_Rating', ascending=False)
-
 export_df = pd.DataFrame(exportList)
+if len(export_df) >0:
+    st.write("Sorted DataFrame:")
+    st.write(rs_df)
+    
+
 
 # Display the sorted DataFrame
-st.write("Sorted DataFrame:")
-st.write(rs_df)
+
 
 
