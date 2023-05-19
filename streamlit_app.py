@@ -123,12 +123,6 @@ exportList = exportList.sort_values(by='RS_Rating', ascending=False)
 print(exportList.iloc[:25])
 
 MomentumStocks = exportList.iloc[:25][['Stock', 'CP']]
-
-MomentumStocks['weights'] = [1/len(MomentumStocks)] * len(MomentumStocks)
-
-MomentumStocks['Quantity'] = (MomentumStocks['CP'].max()/MomentumStocks['CP'])
-
-MomentumStocks['Puschare Value'] = MomentumStocks['Quantity'] * MomentumStocks['CP']
 st.write(MomentumStocks) 
 
 
