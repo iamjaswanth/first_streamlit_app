@@ -117,10 +117,10 @@ for stock in rs_stocks:
 
 exportList = exportList.sort_values(by='RS_Rating', ascending=False)
 
-     export_df = pd.DataFrame(exportList)
+export_df = pd.DataFrame(exportList)
 
-        # Display the sorted DataFrame
-        st.write("Sorted DataFrame:")
-        st.write(export_df)
+# Display the sorted DataFrame
+st.write("Sorted DataFrame:")
+st.write(export_df)
 
 
