@@ -121,6 +121,6 @@ export_df = pd.DataFrame(exportList)
 
 # Display the sorted DataFrame
 st.write("Sorted DataFrame:")
-st.write(export_df)
+st.write(rs_df)
 
 
