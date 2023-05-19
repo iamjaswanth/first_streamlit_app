@@ -115,9 +115,8 @@ for stock in rs_stocks:
     except Exception as e:
         print (e)
         print(f"Could not gather data on {stock}")
-
-  st.write("Sorted DataFrame:")
-  st.write(export_df)
+st.write("Sorted DataFrame:")
+st.write(export_df)
     
 
 
