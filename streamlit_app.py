@@ -22,7 +22,33 @@ returns_multiples = []
 index_df = yf.download(index_name, start_date, end_date)
 index_df['Percent Change'] = index_df['Adj Close'].pct_change()
 index_return = (index_df['Percent Change'] + 1).cumprod()[-1]
-st.write(my_fruit_list) 
+
+# Find top 30% performing stocks (relative to the S&P 500)
+for ticker in tickers['Symbol']:
+    try:
+        # Download historical data as CSV for each stock (makes the process faster)
+        ticker = ticker + ".NS"
+        df = pdr.get_data_yahoo(ticker, start_date, end_date)
+    
+        # Calculating returns relative to the market (returns multiple)
+        df['Percent Change'] = df['Adj Close'].pct_change()
+        stock_return = (df['Percent Change'] + 1).cumprod()[-1]
+        
+        returns_multiple = round((stock_return / index_return), 2)
+        returns_multiples.extend([returns_multiple])
+        
+        print (f'Ticker: {ticker}; Returns Multiple against NIFTY50: {returns_multiple}\n')
+    except:
+         print(f"Could not gather data on {ticker}")
+         
+    
+   
+
+# Creating dataframe of only top 30%
+rs_df = pd.DataFrame(list(zip(tickers['Symbol'], returns_multiples)), columns=['Ticker', 'Returns_multiple'])
+rs_df['RS_Rating'] = rs_df.Returns_multiple.rank(pct=True) * 100
+rs_df = rs_df[rs_df.RS_Rating >= rs_df.RS_Rating.quantile(.70)]
+st.write(rs_df) 
 
 
 
