@@ -61,7 +61,7 @@ for stock in rs_stocks:
     try:
 
         df = pdr.get_data_yahoo(stock + '.NS', start_date, end_date)
-        st.write(df)
+        
         sma = [20,50, 150, 200]
         for x in sma:
             
@@ -111,7 +111,7 @@ for stock in rs_stocks:
         
         CP = currentClose
 
-
+        st.write(CP)
         if(condition_1 and condition_2 and condition_3 and condition_4 and condition_5 and condition_6 and condition_7 and condition_8 and condition_9):
             exportList = exportList.append({'Stock': stock, "RS_Rating": RS_Rating ,"20 Day MA": moving_average_20,"50 Day MA": moving_average_50, "150 Day Ma": moving_average_150, "200 Day MA": moving_average_200, "52 Week Low": low_of_52week, "52 week High": high_of_52week,'CP':CP}, ignore_index=True)
             st.write(stock + " made the Minervini requirements")
