@@ -112,7 +112,7 @@ for stock in rs_stocks:
 
         if(condition_1 and condition_2 and condition_3 and condition_4 and condition_5 and condition_6 and condition_7 and condition_8 and condition_9):
              exportList = exportList.append({'Stock': stock, "RS_Rating": RS_Rating ,"20 Day MA": moving_average_20,"50 Day MA": moving_average_50, "150 Day Ma": moving_average_150, "200 Day MA": moving_average_200, "52 Week Low": low_of_52week, "52 week High": high_of_52week,'CP':CP}, ignore_index=True)
-             st.write(exportList)
+             st.write({'Stock': stock, "RS_Rating": RS_Rating ,"20 Day MA": moving_average_20,"50 Day MA": moving_average_50, "150 Day Ma": moving_average_150, "200 Day MA": moving_average_200, "52 Week Low": low_of_52week, "52 week High": high_of_52week,'CP':CP})
     except Exception as e:
         print (e)
         print(f"Could not gather data on {stock}")
