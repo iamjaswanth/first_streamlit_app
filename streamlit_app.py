@@ -63,6 +63,7 @@ for stock in rs_stocks:
         df = pdr.get_data_yahoo(stock + '.NS', start_date, end_date)
         sma = [20,50, 150, 200]
         for x in sma:
+            st.write(stock + " checking...")
             df["SMA_"+str(x)] = round(df['Adj Close'].rolling(window=x).mean(), 2)
         
         # Storing required values
