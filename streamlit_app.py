@@ -52,7 +52,7 @@ rs_df = pd.DataFrame(list(zip(tickers['Symbol'], returns_multiples)), columns=['
 rs_df['RS_Rating'] = rs_df.Returns_multiple.rank(pct=True) * 100
 rs_df = rs_df[rs_df.RS_Rating >= rs_df.RS_Rating.quantile(.70)]
 
-
+exportList = pd.DataFrame(columns=['Stock', 'RS_Rating', '20 Day MA', '50 Day MA', '150 Day MA', '200 Day MA', '52 Week Low', '52 Week High', 'CP'])
 # Checking Minervini conditions of top 30% of stocks in given list
 rs_stocks = rs_df['Ticker']
 for stock in rs_stocks:
