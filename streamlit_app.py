@@ -45,7 +45,7 @@ for stock in tickers['Symbol']:
 # Create DataFrame
 df = pd.DataFrame(my_list)
 df['Ranked'] = df['SHARPE'].rank(ascending=False)
-top_30_df = df.head(30)
+top_30_df = df.sort_values(by='SHARPE', ascending=False).iloc[:35]
 # Display results in Streamlit
 st.write("### Top Stocks by Sharpe Ratio")
 st.write(top_30_df)
