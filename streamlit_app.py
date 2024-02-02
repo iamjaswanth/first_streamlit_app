@@ -13,8 +13,6 @@ yf.pdr_override()
 def get_stock_metrics(stock):
     try:
         df = pdr.get_data_yahoo(stock + '.NS', start_date, end_date)
-        df['SMA_50'] =  round(df['Adj Close'].rolling(window=50).mean(), 2)
-        moving_average_50 = df["SMA_50"][-1]
         returns = np.log(df['Close'] / df['Close'].shift(1))
         volatility = returns.std() * np.sqrt(252)
         sharpe_ratio = ((returns.mean() * 252) - 0.06) / volatility
