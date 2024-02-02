@@ -45,10 +45,10 @@ for stock in tickers['Symbol']:
 # Create DataFrame
 df = pd.DataFrame(my_list)
 df['Ranked'] = df['SHARPE'].rank(ascending=False)
-
+top_30_df = df.head(30)
 # Display results in Streamlit
 st.write("### Top Stocks by Sharpe Ratio")
-st.write(df)
+st.write(top_30_df)
 
 # Optionally, you can save the results to a CSV file
 # df.to_csv('top_stocks.csv', index=False)
