@@ -1,17 +1,54 @@
 import streamlit as st
+from pandas_datareader import data as pdr
+import yfinance as yf
 import pandas as pd
+import datetime
+import time
+import numpy as np
 
-# Sample DataFrame
-data = {
-    'Stock': ['ANANDRATHI', 'ELECTCAST', 'BSOFT', 'BSE', 'GET&D', 'TITAGARH', 'ARE&M', 'RAMKY', 'HBLPOWER', 'MEDANTA', 'CHOICEIN', 'ANANTRAJ', 'HSCL', 'NEWGEN', 'SUZLON', 'INOXWIND', 'MAHSEAMLES', 'ARVIND', 'NBCC', 'MANINFRA', 'NEULANDLAB', 'NLCINDIA', 'ZENTEC', 'KAYNES', 'HUDCO'],
-    'SHARPE': [4.588474360833756, 3.61943405439196, 3.6019719295526973, 3.5746166255415415, 3.477333305410144, 3.3790442032068326, 3.3739215022891926, 3.3204797039030183, 3.2719179061979085, 3.2079037393643164, 3.1848571178322493, 3.148174460547314, 3.1444405550049512, 3.113821746774108, 3.0987178321058395, 3.079374816685639, 3.011381514436126, 2.99540737933789, 2.995383041998424, 2.91863679625796, 2.9025304383995665, 2.879384561138901, 2.8611453435531127, 2.8564211315450874, 2.8256623837139543],
-    'Ranked': [1.0, 2.0, 3.0, 4.0, 5.0, 6.0, 7.0, 8.0, 9.0, 10.0, 11.0, 12.0, 13.0, 14.0, 15.0, 16.0, 17.0, 18.0, 19.0, 20.0, 21.0, 22.0, 23.0, 24.0, 25.0]
-}
+# Override yfinance with pandas_datareader's methods
+yf.pdr_override()
 
-df = pd.DataFrame(data)
+# Function to get stock data and calculate metrics
+def get_stock_metrics(stock):
+    try:
+        df = pdr.get_data_yahoo(stock + '.NS', start_date, end_date)
+        returns = np.log(df['Close'] / df['Close'].shift(1))
+        volatility = returns.std() * np.sqrt(252)
+        sharpe_ratio = ((returns.mean() * 252) - 0.06) / volatility
+        median = df['Volume'].median()
+        if median > 100:
+            return {'Stock': stock, 'SHARPE': sharpe_ratio}
+    except Exception as e:
+        st.error(f"Could not gather data on {stock}")
+        st.error(str(e))
+        return None
 
-# Streamlit app
-st.title('Stock Analysis')
+# Streamlit App
+st.title("Stock Sharpe Ratio Analysis")
 
-# Display the DataFrame
-st.table(df)
+# Set up dates
+start_date = datetime.datetime.now() - datetime.timedelta(days=365)
+end_date = datetime.date.today()
+
+# Read tickers
+tickers_micro = pd.read_csv("./ind_niftymicrocap250_list.csv") 
+tickers = pd.concat([tickers_micro], ignore_index=True)
+
+# Process tickers
+my_list = []
+for stock in tickers['Symbol']:
+    result = get_stock_metrics(stock)
+    if result:
+        my_list.append(result)
+
+# Create DataFrame
+df = pd.DataFrame(my_list)
+df['Ranked'] = df['SHARPE'].rank(ascending=False)
+
+# Display results in Streamlit
+st.write("### Top Stocks by Sharpe Ratio")
+st.write(df)
+
+# Optionally, you can save the results to a CSV file
+# df.to_csv('top_stocks.csv', index=False)
