@@ -25,7 +25,7 @@ def get_stock_metrics(stock):
         return None
 
 # Streamlit App
-st.title("Stock Sharpe Ratio Analysis")
+st.title("Momentum Investing")
 
 # Set up dates
 start_date = datetime.datetime.now() - datetime.timedelta(days=365)
