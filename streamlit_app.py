@@ -23,18 +23,7 @@ def get_stock_metrics(stock):
         st.error(f"Could not gather data on {stock}")
         st.error(str(e))
         return None
-# Streamlit App
-st.markdown(
-    """
-    <style>
-        body {
-            color: white;
-            background-color: black;
-        }
-    </style>
-    """,
-    unsafe_allow_html=True
-)
+
 # Streamlit App
 st.title("Momentum Investing")
 
