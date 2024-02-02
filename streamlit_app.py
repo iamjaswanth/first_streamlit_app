@@ -18,7 +18,7 @@ def get_stock_metrics(stock):
         sharpe_ratio = ((returns.mean() * 252) - 0.06) / volatility
         median = df['Volume'].median()
         if median > 100:
-            return {'Stock': stock, 'SHARPE': sharpe_ratio,'MA_50':moving_average_50}
+            return {'Stock': stock, 'SHARPE': sharpe_ratio}
     except Exception as e:
         st.error(f"Could not gather data on {stock}")
         st.error(str(e))
