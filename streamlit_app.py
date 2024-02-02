@@ -15,10 +15,11 @@ def get_stock_metrics(stock):
         df = pdr.get_data_yahoo(stock + '.NS', start_date, end_date)
         returns = np.log(df['Close'] / df['Close'].shift(1))
         volatility = returns.std() * np.sqrt(252)
+		moving_average_50 =  round(df['Adj Close'].rolling(window=50).mean(), 2)
         sharpe_ratio = ((returns.mean() * 252) - 0.06) / volatility
         median = df['Volume'].median()
         if median > 100:
-            return {'Stock': stock, 'SHARPE': sharpe_ratio}
+            return {'Stock': stock, 'SHARPE': sharpe_ratio,'MA50':moving_average_50}
     except Exception as e:
         st.error(f"Could not gather data on {stock}")
         st.error(str(e))
