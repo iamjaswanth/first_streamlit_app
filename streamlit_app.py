@@ -15,7 +15,8 @@ def get_stock_metrics(stock):
         df = pdr.get_data_yahoo(stock + '.NS', start_date, end_date)
         returns = np.log(df['Close'] / df['Close'].shift(1))
         volatility = returns.std() * np.sqrt(252)
-        moving_average_50 =  round(df['Adj Close'].rolling(window=50).mean(), 2)
+        df['SMA_50'] =  round(df['Adj Close'].rolling(window=50).mean(), 2)
+        moving_average_50 = df["SMA_50"][-1]
         sharpe_ratio = ((returns.mean() * 252) - 0.06) / volatility
         median = df['Volume'].median()
         if median > 100:
