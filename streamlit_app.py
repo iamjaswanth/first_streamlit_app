@@ -47,7 +47,7 @@ df = pd.DataFrame(my_list)
 df['Ranked'] = df['SHARPE'].rank(ascending=False)
 top_30_df = df.sort_values(by='SHARPE', ascending=False).iloc[:35]
 # Display results in Streamlit
-st.write("### Top Stocks by Sharpe Ratio")
+st.write("### Top 35 Momentum Stocks")
 st.write(top_30_df)
 
 # Optionally, you can save the results to a CSV file
