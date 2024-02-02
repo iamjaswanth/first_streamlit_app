@@ -11,7 +11,7 @@ data = {
 df = pd.DataFrame(data)
 
 # Streamlit app
-st.title('DataFrame Display Example')
+st.title('Momentum Investing')
 
 # Display the DataFrame
 st.write(df)
